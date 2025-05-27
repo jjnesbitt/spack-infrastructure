@@ -24,34 +24,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - docker-image: ./images/gh-gl-sync
-            image-tags: ghcr.io/spack/ci-bridge:0.0.45
-          - docker-image: ./images/ci-key-clear
-            image-tags: ghcr.io/spack/ci-key-clear:0.0.2
-          - docker-image: ./images/gitlab-stuckpods
-            image-tags: ghcr.io/spack/stuckpods:0.0.1
-          - docker-image: ./images/gitlab-clear-pipelines
-            image-tags: ghcr.io/spack/gitlab-clear-pipelines:0.0.1
-          - docker-image: ./images/gitlab-delete-stale-branches
-            image-tags: ghcr.io/spack/gitlab-delete-stale-branches:0.0.1
-          - docker-image: ./images/gitlab-skipped-pipelines
-            image-tags: ghcr.io/spack/gitlab-skipped-pipelines:0.0.2
-          - docker-image: ./images/notary
-            image-tags: ghcr.io/spack/notary:0.0.3
-          - docker-image: ./images/python-aws-bash
-            image-tags: ghcr.io/spack/python-aws-bash:0.0.2
-          - docker-image: ./images/snapshot-release-tags
-            image-tags: ghcr.io/spack/snapshot-release-tags:0.0.4
-          - docker-image: ./images/cache-indexer
-            image-tags: ghcr.io/spack/cache-indexer:0.0.6
           - docker-image: ./analytics
-            image-tags: ghcr.io/spack/django:0.5.2
-          - docker-image: ./images/ci-prune-buildcache
-            image-tags: ghcr.io/spack/ci-prune-buildcache:0.0.4
-          - docker-image: ./images/protected-publish
-            image-tags: ghcr.io/spack/protected-publish:0.0.9
-          - docker-image: ./images/retry-trigger-jobs
-            image-tags: ghcr.io/spack/retry-trigger-jobs:0.0.1
+            image-tags: ghcr.io/jjnesbitt/django:0.5.0
     steps:
       - name: Checkout
         uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4.1.3
@@ -76,7 +50,7 @@ jobs:
         with:
           context: ${{ matrix.docker-image }}
           file: ${{ matrix.docker-image }}/Dockerfile
-          push: ${{ github.ref == 'refs/heads/main' }} # only publish image on push to main
+          push: true
           tags: ${{ matrix.image-tags }}
           platforms: linux/amd64,linux/arm64
 
