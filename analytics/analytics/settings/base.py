@@ -43,6 +43,14 @@ DATABASES |= {
         "PASSWORD": os.environ["GITLAB_DB_PASS"],
         "PORT": os.environ["GITLAB_DB_PORT"],
     },
+    "backup": {
+        "ENGINE": "django.db.backends.postgresql",
+        "USER": os.environ["BACKUP_DB_USER"],
+        "HOST": os.environ["BACKUP_DB_HOST"],
+        "PORT": os.environ["BACKUP_DB_PORT"],
+        "NAME": os.environ["BACKUP_DB_NAME"],
+        "PASSWORD": os.environ["BACKUP_DB_PASS"],
+    }
 }
 
 # django-extensions

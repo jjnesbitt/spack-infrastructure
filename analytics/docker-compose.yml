@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   postgres:
     image: postgres:15
@@ -10,6 +10,14 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
+  postgres-backup:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: django
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5433:5432
+      
   metabase:
     image: metabase/metabase
     ports:
